@@ -2,28 +2,55 @@
 
 ## Problem Description
 
-In this programming challenge, your goal is to implement a program that works in less than one second even on huge datasets.
+In this programming challenge, your goal is to implement a program that solves the maximum pairwise product in less than one second even on huge datasets.
 
 ## My solution
 
-#### sum_two_digits.py
+### maximum_pairwise_product.py
+
+#### Using the built-in sorted() function
 
 ```python
-def main():
-    n = int(input())
-    seq = list(map(int, input().split()))
-
-    print(max_pairwise_product(seq))
-
-
-def max_pairwise_product(lst):
+def max_pairwise_product_sorted(lst):
     """Returns maximum pairwise product from lst"""
     lst = sorted(lst)
     return lst[-1] * lst[-2]
+```
 
+#### Naive implementation, iterating over the entire list n^2 times O(n^2)
 
-if __name__ == "__main__":
-    main()
+```python
+# O(n^2)
+def max_pairwise_product_naive(lst):
+    """Returns maximum pairwise product from lst"""
+    l = len(lst)
+    max_product = 0
+
+    for i in range(l):
+        for j in range(i + 1, l):
+            curr_product = lst[i] * lst[j]
+            if curr_product > max_product:
+                max_product = curr_product
+
+    return max_product
+```
+
+### Faster implementation, iterating over the entire list twice 0(2n)
+
+```python
+# O(n)
+def max_pairwise_product_faster(lst):
+    """Returns maximum pairwise product from lst"""
+    tmp = [0, 0, 0, 0]
+    for i, val in enumerate(lst):
+        if val > tmp[0]:
+            tmp[0] = val
+            tmp[1] = i
+    for i, val in enumerate(lst):
+        if val > tmp[2] and i != tmp[1]:
+            tmp[2] = val
+
+    return tmp[0] * tmp[2]
 ```
 
 ## Tests
