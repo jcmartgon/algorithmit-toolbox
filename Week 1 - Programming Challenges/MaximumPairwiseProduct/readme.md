@@ -35,7 +35,7 @@ def max_pairwise_product_naive(lst):
     return max_product
 ```
 
-### Faster implementation, iterating over the entire list twice 0(2n)
+### Faster implementation, iterating over the entire list twice O(2n)
 
 ```python
 # O(n)

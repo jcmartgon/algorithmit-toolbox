@@ -13,6 +13,8 @@ lst = []
 for _ in range(10000):
     lst.append(random.randint(0, 10000))
 
+naive = max_pairwise_product_naive(lst)
+
 
 def test_max_pairwise_product__sortedordered():
     assert max_pairwise_product_sorted([1, 2, 3]) == 6
@@ -45,8 +47,8 @@ def test_max_pairwise_product_faster_reversed():
 
 
 def test_stress_sorted():
-    assert max_pairwise_product_sorted(lst) == max_pairwise_product_naive(lst)
+    assert max_pairwise_product_sorted(lst) == naive
 
 
 def test_stress_faster():
-    assert max_pairwise_product_faster(lst) == max_pairwise_product_naive(lst)
+    assert max_pairwise_product_faster(lst) == naive
